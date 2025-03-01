@@ -23,6 +23,22 @@
     <!-- Create Table Modal -->
     <div class="modal fade" id="createTableModal">
         <!-- Modal content here -->
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Create New Table</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <input type="text" id="tableName" class="form-control mb-3" placeholder="Table Name">
+              <input type="text" id="players" class="form-control" placeholder="Player names (comma separated)">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="createTable()">Create</button>
+            </div>
+          </div>
+        </div>
     </div>
 
     <script src="js/dashboard.js"></script>
