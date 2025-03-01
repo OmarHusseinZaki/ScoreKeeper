@@ -21,16 +21,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Load All Tables
-async function loadTables() {
+function loadTables() {
   const userId = auth.currentUser.uid;
   const tablesContainer = document.getElementById('tables-container');
   
   db.collection('users').doc(userId).collection('tables')
-    .onSnapshot(snapshot => {
-      tablesContainer.innerHTML = '';
-      snapshot.forEach(doc => renderTable(doc.id, doc.data()));
-    });
+    .onSnapshot(
+      snapshot => {
+        tablesContainer.innerHTML = '';
+        snapshot.forEach(doc => renderTable(doc.id, doc.data()));
+      },
+      error => {
+        console.error("Firestore error:", error);
+        if (error.code === 'permission-denied') {
+          alert('You dont have permission to view these tables!');
+        }
+      }
+    );
 }
 
 // Render Single Table
