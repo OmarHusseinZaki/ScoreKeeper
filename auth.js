@@ -70,7 +70,12 @@ document.getElementById('switch-to-signup').addEventListener('click', () => {
 
 // Error Display Function
 function showError(message) {
-  const errorDiv = document.getElementById('auth-error');
-  errorDiv.textContent = message;
-  errorDiv.classList.remove('d-none');
+    const errorDiv = document.getElementById('auth-error');
+    errorDiv.innerHTML = `
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `;
+    errorDiv.classList.remove('d-none');
 }
