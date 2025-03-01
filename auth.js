@@ -36,13 +36,14 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
   const password = document.getElementById('signup-password').value;
 
   auth.createUserWithEmailAndPassword(email, password)
-    .then((userCredential) => {
-      db.collection('users').doc(userCredential.user.uid).set({
-        email: email,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
+  .then((userCredential) => {
+    db.collection('users').doc(userCredential.user.uid).set({
+      email: email,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      uid: userCredential.user.uid // Add this line
+    });
       window.location.href = 'dashboard.html';
-    })
+    });
     .catch(error => {
       showError(error.message);
       console.error("Signup Error:", error);
