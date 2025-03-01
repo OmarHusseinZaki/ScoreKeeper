@@ -43,7 +43,7 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
       uid: userCredential.user.uid // Add this line
     });
       window.location.href = 'dashboard.html';
-    });
+    })
     .catch(error => {
       showError(error.message);
       console.error("Signup Error:", error);
