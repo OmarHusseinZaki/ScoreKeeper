@@ -40,6 +40,33 @@ document.getElementById('signup-form').addEventListener('submit', (e) => {
     .catch(error => showError(error.message));
 });
 
+// Signup Form Handler
+document.getElementById('signup-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
+
+    auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            // Create user document in Firestore
+            db.collection('users').doc(userCredential.user.uid).set({
+                email: email,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            window.location.href = 'dashboard.html';
+        })
+        .catch(error => {
+            showError(error.message);
+            console.error("Signup Error:", error);
+        });
+});
+
+// Toggle Forms Functionality
+document.getElementById('switch-to-signup').addEventListener('click', () => {
+    document.getElementById('login-form').classList.add('d-none');
+    document.getElementById('signup-form').classList.remove('d-none');
+});
+
 // Error Display Function
 function showError(message) {
   const errorDiv = document.getElementById('auth-error');
